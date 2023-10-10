@@ -48,7 +48,7 @@ export function InlinePopup({
     }
 
     function handleClickOutside(event: MouseEvent) {
-      console.log("click");
+      // console.log("click");
       if (!popupRef.current) return; // It's already closed
 
       if (isOpen && !popupRef.current.contains(event.target as Node)) {

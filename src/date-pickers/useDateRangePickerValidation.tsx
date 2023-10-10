@@ -100,6 +100,7 @@ export function useDateRangePickerValidation({
       const validation = validateValue(value);
 
       console.log({ startValue, endValue, start, end, ...validation });
+      return { startValue, endValue, start, end, ...validation };
     }
   }, [validateValue]);
 

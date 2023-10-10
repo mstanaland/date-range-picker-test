@@ -103,7 +103,7 @@ export function DateRangePicker<T extends DateValue>({
   // but it isn't actually used
   const focusFirst = labelProps.onClick as () => void;
 
-  console.log("groupProps", groupProps);
+  // console.log("groupProps", groupProps);
 
   return (
     <div className="sarsa--date-range-picker">
