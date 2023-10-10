@@ -114,10 +114,10 @@ export function DateRangePicker<T extends DateValue>({
         </div>
         <div
           {...groupProps}
-          onClick={(e) => {
-            console.log("click");
-            groupProps.onClick(e);
-          }}
+          // onClick={(e) => {
+          //   console.log("click");
+          //   groupProps.onClick(e);
+          // }}
           ref={ref}
           className={cx("inputs-group", { invalid: state.isInvalid })}
         >
