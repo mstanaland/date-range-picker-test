@@ -1,0 +1,12 @@
+.error-message {
+  font-size: 12px;
+  line-height: 18px;
+
+  .asterisk {
+    color: var(--color-error-border);
+    font-size: 14px;
+    line-height: 18px;
+    position: relative;
+    top: 2px;
+  }
+}

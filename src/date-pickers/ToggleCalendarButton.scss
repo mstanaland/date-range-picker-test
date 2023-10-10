@@ -1,0 +1,30 @@
+.toggle-calendar-button {
+  appearance: none;
+  cursor: pointer;
+  color: var(--icon-color);
+  background-color: var(--button-background);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: none;
+  border-left: solid 1px var(--field-border);
+  width: 36px;
+  height: 38px;
+  padding: 0;
+  vertical-align: middle;
+  box-sizing: content-box;
+  outline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    background-color: var(--highlight-background);
+    color: black;
+    box-shadow: 0 0 0 2px var(--focus-color);
+    border-left-color: transparent;
+  }
+
+  svg {
+    width: 20px;
+  }
+}

@@ -1,0 +1,29 @@
+.sarsa--inline-popup {
+  position: absolute;
+  height: 2px;
+  z-index: 500;
+
+  .inline-popup-keyboard-close-btn {
+    opacity: 1;
+    position: absolute;
+    font-size: 14px;
+    appearance: none;
+    border: 0;
+    background: black;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-weight: 500;
+    line-height: 24px;
+    top: -8px;
+    right: -12px;
+    z-index: 10;
+    opacity: 0;
+
+    &:focus {
+      opacity: 1;
+      outline: solid 2px var(--focus-color);
+    }
+  }
+}
