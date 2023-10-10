@@ -192,7 +192,9 @@ export function DateRangePicker<T extends DateValue>({
         <div className="description" {...descriptionProps}>
           {description}
         </div>
-        <ErrorMessage {...errorMessageProps}>{errorMessage}</ErrorMessage>
+        <ErrorMessage {...errorMessageProps} role="alert">
+          {errorMessage}
+        </ErrorMessage>
       </TabFocusGuard>
     </div>
   );
