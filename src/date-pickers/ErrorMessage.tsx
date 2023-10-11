@@ -12,6 +12,7 @@ interface ErrorMessageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 export function ErrorMessage({
   children,
   className,
+  role,
   ...rest
 }: ErrorMessageProps) {
   if (!children) {
@@ -19,8 +20,12 @@ export function ErrorMessage({
   }
 
   return (
-    <div className={cx("error-message", className)} {...rest}>
-      <span className="asterisk">*</span> {children}
+    <div {...rest}>
+      {children ? (
+        <div role={role} className={cx("error-message", className)}>
+          <span className="asterisk">*</span> {children}
+        </div>
+      ) : null}
     </div>
   );
 }

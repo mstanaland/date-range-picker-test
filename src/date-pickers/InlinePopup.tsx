@@ -11,6 +11,7 @@ interface InlinePopupProps {
   resetFocus: () => void;
   isOpen: boolean;
   shouldTrapFocus?: boolean;
+  outsideId?: string;
 }
 
 export function InlinePopup({
@@ -19,27 +20,15 @@ export function InlinePopup({
   close,
   resetFocus,
   shouldTrapFocus,
+  outsideId,
 }: InlinePopupProps) {
   const popupRef = React.useRef<HTMLDivElement>(null);
-  const previousOpenStateRef = React.useRef(isOpen);
-
-  // React.useEffect(() => {
-  //   console.log(document.activeElement);
-  //   if (!isOpen && previousOpenStateRef.current) {
-  //     // close();
-  //     resetFocus();
-  //     previousOpenStateRef.current = false;
-  //   } else {
-  //     previousOpenStateRef.current = isOpen;
-  //   }
-  // }, [close, isOpen, resetFocus]);
 
   // Setup the keyboard and mouse event listeners
   React.useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (isOpen && event.key === "Escape") {
         close();
-        previousOpenStateRef.current = false;
 
         if (popupRef.current?.contains(event.target as Node)) {
           resetFocus();
@@ -48,23 +37,36 @@ export function InlinePopup({
     }
 
     function handleClickOutside(event: MouseEvent) {
-      // console.log("click");
       if (!popupRef.current) return; // It's already closed
 
       if (isOpen && !popupRef.current.contains(event.target as Node)) {
         close();
-        previousOpenStateRef.current = false;
+      }
+    }
+
+    function handleOutsideIdClick(event: MouseEvent) {
+      if (!popupRef.current || !outsideId) return; // It's already closed
+
+      const el = document.getElementById(outsideId);
+
+      // If it's not in the DOM ignore
+      if (!el) return;
+
+      if (isOpen && !el.contains(event.target as Node)) {
+        close();
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mouseup", handleOutsideIdClick);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mouseup", handleOutsideIdClick);
     };
-  }, [close, isOpen, resetFocus]);
+  }, [close, isOpen, outsideId, resetFocus]);
 
   return isOpen ? (
     <div ref={popupRef} data-inline-popup className="sarsa--inline-popup">

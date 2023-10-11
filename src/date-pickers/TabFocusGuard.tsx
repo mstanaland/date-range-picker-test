@@ -2,13 +2,18 @@
 
 import * as React from "react";
 
-interface TabFocusGuardProps {
+interface TabFocusGuardProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   close: () => void;
   isOpen: boolean;
 }
 
-export function TabFocusGuard({ children, close, isOpen }: TabFocusGuardProps) {
+export function TabFocusGuard({
+  children,
+  close,
+  isOpen,
+  ...rest
+}: TabFocusGuardProps) {
   const ref = React.useRef<HTMLDivElement>(null);
 
   // Setup the keyboard and mouse event listeners
@@ -33,7 +38,12 @@ export function TabFocusGuard({ children, close, isOpen }: TabFocusGuardProps) {
   }, [close, isOpen]);
 
   return (
-    <div ref={ref} data-tab-focus-guard className="sarsa--tab-focus-guard">
+    <div
+      ref={ref}
+      data-tab-focus-guard
+      className="sarsa--tab-focus-guard"
+      {...rest}
+    >
       {children}
     </div>
   );

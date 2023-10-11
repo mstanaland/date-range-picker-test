@@ -12,28 +12,27 @@ function App() {
     end: parseDate("2020-02-08"),
   });
 
-  const { isInvalid, errorMessage, validate, dateRangePickerProps } =
-    useDateRangePickerValidation({
-      label: "Date Range",
-      isRequired: true,
-      onChange: (x) => {
-        // console.log("onChange", x);
-      },
-      validator: ({ start, end }) => {
-        if (start && end) {
-          const isInvalid = end.compare(start) <= 2;
-          const errorMessage = isInvalid
-            ? "Minimum reservation length is 4 days"
-            : undefined;
-          return { isInvalid, errorMessage };
-        }
+  const { validate, dateRangePickerProps } = useDateRangePickerValidation({
+    label: "With Validation",
+    isRequired: true,
+    // onChange: (x) => {
+    //   console.log("onChange", x);
+    // },
+    validator: ({ start, end }) => {
+      if (start && end) {
+        const isInvalid = end.compare(start) <= 2;
+        const errorMessage = isInvalid
+          ? "Minimum reservation length is 4 days"
+          : undefined;
+        return { isInvalid, errorMessage };
+      }
 
-        return {
-          isInvalid: false,
-          errorMessage: undefined,
-        };
-      },
-    });
+      return {
+        isInvalid: false,
+        errorMessage: undefined,
+      };
+    },
+  });
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -80,7 +79,7 @@ function App() {
 
         <div className="spacer" />
         <label>
-          <div>Something</div> <input type="text" name="my-input" />
+          <div>Something</div> <input type="text" name="something" />
         </label>
 
         <div className="spacer" />
@@ -91,11 +90,11 @@ function App() {
 
       <div className="spacer" />
 
-      {/* <DateRangePicker
+      <DateRangePicker
         label="Controlled date picker"
         value={value}
         onChange={setValue}
-      /> */}
+      />
 
       <div className="spacer" />
 
@@ -121,7 +120,7 @@ function App() {
 
       <div className="spacer" />
 
-      <button>Hello</button>
+      <button onClick={() => console.log("Hello yourself")}>Hello</button>
     </div>
   );
 }

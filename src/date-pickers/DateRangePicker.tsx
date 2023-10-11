@@ -35,17 +35,21 @@ interface DateRangePickerProps<T extends DateValue>
   name?: string;
   startInputRef?: React.RefObject<HTMLInputElement>;
   endInputRef?: React.RefObject<HTMLInputElement>;
+  id?: string;
+  className?: string;
 }
 
 export function DateRangePicker<T extends DateValue>({
   name = "dateRangePicker",
   startInputRef,
   endInputRef,
+  id,
+  className,
   ...rest
 }: DateRangePickerProps<T>) {
   //
   const { label, errorMessage, isRequired, description } = rest;
-
+  const outsideId = React.useId();
   const state = useDateRangePickerState(rest);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const ref = React.useRef<HTMLDivElement>(null);
@@ -103,21 +107,15 @@ export function DateRangePicker<T extends DateValue>({
   // but it isn't actually used
   const focusFirst = labelProps.onClick as () => void;
 
-  // console.log("groupProps", groupProps);
-
   return (
-    <div className="sarsa--date-range-picker">
-      <TabFocusGuard isOpen={state.isOpen} close={state.close}>
+    <div className={cx("sarsa--date-range-picker", className)} id={id}>
+      <TabFocusGuard isOpen={state.isOpen} close={state.close} id={outsideId}>
         <div {...labelProps} className="label">
           {label}
           {isRequired ? "*" : null}
         </div>
         <div
           {...groupProps}
-          // onClick={(e) => {
-          //   console.log("click");
-          //   groupProps.onClick(e);
-          // }}
           ref={ref}
           className={cx("inputs-group", { invalid: state.isInvalid })}
         >
@@ -173,6 +171,7 @@ export function DateRangePicker<T extends DateValue>({
           close={state.close}
           resetFocus={resetFocus}
           shouldTrapFocus={autoFocus}
+          outsideId={outsideId}
         >
           <div className="popup" {...dialogProps}>
             <RangeCalendar
