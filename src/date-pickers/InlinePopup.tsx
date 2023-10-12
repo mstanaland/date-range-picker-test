@@ -3,7 +3,9 @@
 import "./InlinePopup.scss";
 
 import * as React from "react";
+import cx from "classnames";
 import FocusLock from "react-focus-lock";
+import { usePopupPosition } from "./utils";
 
 interface InlinePopupProps {
   children: React.ReactNode;
@@ -23,6 +25,28 @@ export function InlinePopup({
   outsideId,
 }: InlinePopupProps) {
   const popupRef = React.useRef<HTMLDivElement>(null);
+  const innerRef = React.useRef<HTMLDivElement>(null);
+
+  // React.useEffect(() => {
+  //   function logOffset() {
+  //     if (popupRef.current) {
+  //       const offset = getOffsets(popupRef.current);
+  //       console.log(offset);
+  //     }
+  //     if (innerRef.current) {
+  //       console.dir(innerRef.current);
+  //     }
+  //   }
+
+  //   document.addEventListener("scroll", logOffset);
+
+  //   return () => {
+  //     document.removeEventListener("scroll", logOffset);
+  //   };
+  // }, []);
+
+  const position = usePopupPosition({ popupRef, innerRef, isOpen });
+  console.log("position", position);
 
   // Setup the keyboard and mouse event listeners
   React.useEffect(() => {
@@ -68,25 +92,35 @@ export function InlinePopup({
     };
   }, [close, isOpen, outsideId, resetFocus]);
 
-  return isOpen ? (
-    <div ref={popupRef} data-inline-popup className="sarsa--inline-popup">
-      {shouldTrapFocus ? (
-        <FocusLock>
-          <button
-            type="button"
-            className="inline-popup-keyboard-close-btn"
-            onClick={() => {
-              close();
-              resetFocus();
-            }}
-          >
-            X
-          </button>
-          {children}
-        </FocusLock>
-      ) : (
-        children
-      )}
+  return (
+    <div
+      ref={popupRef}
+      data-component="inline-popup"
+      style={{ position: "relative" }}
+    >
+      {isOpen ? (
+        <div className={cx("sarsa--inline-popup", position)}>
+          <div ref={innerRef} className="sarsa--inline-popup-children">
+            {shouldTrapFocus ? (
+              <FocusLock>
+                <button
+                  type="button"
+                  className="inline-popup-keyboard-close-btn"
+                  onClick={() => {
+                    close();
+                    resetFocus();
+                  }}
+                >
+                  X
+                </button>
+                {children}
+              </FocusLock>
+            ) : (
+              children
+            )}
+          </div>
+        </div>
+      ) : null}
     </div>
-  ) : null;
+  );
 }

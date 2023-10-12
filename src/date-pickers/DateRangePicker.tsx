@@ -26,25 +26,20 @@ import { ErrorMessage } from "./ErrorMessage";
 
 interface DateRangePickerProps<T extends DateValue>
   extends AriaDateRangePickerProps<T> {
-  label?: string;
-  startName?: string;
-  endName?: string;
-  pageBehavior?: "single" | "visible";
-  minValue?: DateValue;
-  maxValue?: DateValue;
-  name?: string;
-  startInputRef?: React.RefObject<HTMLInputElement>;
-  endInputRef?: React.RefObject<HTMLInputElement>;
+  startRef?: React.RefObject<HTMLInputElement>;
+  endRef?: React.RefObject<HTMLInputElement>;
   id?: string;
   className?: string;
 }
 
 export function DateRangePicker<T extends DateValue>({
-  name = "dateRangePicker",
-  startInputRef,
-  endInputRef,
+  startName = "rangePickerStart",
+  endName = "rangePickerStartEnd",
+  startRef,
+  endRef,
   id,
   className,
+  pageBehavior = "single",
   ...rest
 }: DateRangePickerProps<T>) {
   //
@@ -85,12 +80,6 @@ export function DateRangePicker<T extends DateValue>({
     setAutoFocus(true);
     state.toggle();
   };
-
-  // React.useEffect(() => {
-  //   if (!state.isOpen && document.activeElement?.tagName === "BODY") {
-  //     resetFocus();
-  //   }
-  // }, [state.isOpen, resetFocus]);
 
   // There doesn't seem to be a way of updating the calendar position manually without setting
   // focus, so we're using this key to force re-render the RangeCalendar when the user
@@ -159,10 +148,11 @@ export function DateRangePicker<T extends DateValue>({
 
           <ToggleCalendarButton {...buttonProps} ref={triggerRef} />
           <HiddenInputs
-            name={name}
+            startName={startName}
+            endName={endName}
             value={state.value}
-            startInputRef={startInputRef}
-            endInputRef={endInputRef}
+            startRef={startRef}
+            endRef={endRef}
           />
         </div>
 
@@ -179,7 +169,7 @@ export function DateRangePicker<T extends DateValue>({
               onChange={onChangeOverride}
               autoFocus={autoFocus}
               key={rangeCalendarKey}
-              pageBehavior="single"
+              pageBehavior={pageBehavior}
             />
 
             <ErrorMessage className="popup-error-message">

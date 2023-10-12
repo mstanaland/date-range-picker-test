@@ -3,13 +3,22 @@
   height: 2px;
   z-index: 500;
 
+  &.above {
+    bottom: 44px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .sarsa--inline-popup-children {
+    position: relative;
+  }
+
   .inline-popup-keyboard-close-btn {
-    opacity: 1;
     position: absolute;
     font-size: 14px;
     appearance: none;
     border: 0;
-    background: black;
+    background: var(--focus-color);
     color: white;
     width: 24px;
     height: 24px;
@@ -20,10 +29,13 @@
     right: -12px;
     z-index: 10;
     opacity: 0;
+    box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    outline: 0;
 
     &:focus {
       opacity: 1;
-      outline: solid 2px var(--focus-color);
+      // outline: solid 2px var(--focus-color);
+      // border-color: transparent;
     }
   }
 }

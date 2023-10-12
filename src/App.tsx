@@ -67,15 +67,40 @@ function App() {
       </div>
 
       <div className="spacer" />
+      <div>
+        Sit consetetur duo duo sit justo accusam dolore, nonumy sea et dolores
+        voluptua et takimata, dolore sed et sit lorem sed voluptua, amet diam
+        stet gubergren sed. Labore stet takimata diam labore dolor at dolor
+        ipsum at. Sea sed takimata invidunt at amet, dolore diam lorem aliquyam
+        consetetur. Vero et justo stet et no tempor elitr dolores labore,
+        invidunt eos nonumy rebum et clita eos duo eos, no amet sed gubergren
+        amet dolor dolore sed et, justo at amet sadipscing amet kasd dolores
+        nonumy, amet et dolore labore et consetetur dolor. Dolor invidunt kasd
+        sit ipsum. Rebum gubergren voluptua ut lorem dolor est ipsum et sanctus.
+        Lorem tempor sit eirmod ea duo ea, et erat et sanctus invidunt eirmod
+        accusam voluptua eos aliquyam, et dolore no dolores sea ut dolore clita.
+        Amet magna dolor sed et aliquyam ipsum et. Stet diam lorem erat sanctus
+        at, et vero elitr sit ipsum tempor, vero dolor et elitr clita ipsum diam
+        dolores no duo, lorem accusam ut et dolor vero takimata stet, sed
+        sadipscing ut ut tempor nonumy aliquyam sanctus, dolore diam magna erat
+        diam diam et. Sed duo tempor elitr amet sed amet sanctus sadipscing
+        rebum, no diam magna vero magna eirmod.
+      </div>
+
+      <div className="spacer" />
 
       <form onSubmit={onSubmit}>
         <label>
           <div>A field</div> <input type="text" name="my-input" />
         </label>
 
-        <DateRangePicker label="Plain Jane" name="plainJane" />
+        <DateRangePicker
+          label="Plain Jane"
+          startName="whatStart"
+          endName="whatEnd"
+        />
         <div className="spacer" />
-        <DateRangePicker {...dateRangePickerProps} name="withValidation" />
+        {/* <DateRangePicker {...dateRangePickerProps} name="withValidation" /> */}
 
         <div className="spacer" />
         <label>
@@ -90,14 +115,35 @@ function App() {
 
       <div className="spacer" />
 
-      <DateRangePicker
+      {/* <DateRangePicker
         label="Controlled date picker"
         value={value}
         onChange={setValue}
-      />
+      /> */}
 
       <div className="spacer" />
 
+      <div>
+        Sit consetetur duo duo sit justo accusam dolore, nonumy sea et dolores
+        voluptua et takimata, dolore sed et sit lorem sed voluptua, amet diam
+        stet gubergren sed. Labore stet takimata diam labore dolor at dolor
+        ipsum at. Sea sed takimata invidunt at amet, dolore diam lorem aliquyam
+        consetetur. Vero et justo stet et no tempor elitr dolores labore,
+        invidunt eos nonumy rebum et clita eos duo eos, no amet sed gubergren
+        amet dolor dolore sed et, justo at amet sadipscing amet kasd dolores
+        nonumy, amet et dolore labore et consetetur dolor. Dolor invidunt kasd
+        sit ipsum. Rebum gubergren voluptua ut lorem dolor est ipsum et sanctus.
+        Lorem tempor sit eirmod ea duo ea, et erat et sanctus invidunt eirmod
+        accusam voluptua eos aliquyam, et dolore no dolores sea ut dolore clita.
+        Amet magna dolor sed et aliquyam ipsum et. Stet diam lorem erat sanctus
+        at, et vero elitr sit ipsum tempor, vero dolor et elitr clita ipsum diam
+        dolores no duo, lorem accusam ut et dolor vero takimata stet, sed
+        sadipscing ut ut tempor nonumy aliquyam sanctus, dolore diam magna erat
+        diam diam et. Sed duo tempor elitr amet sed amet sanctus sadipscing
+        rebum, no diam magna vero magna eirmod.
+      </div>
+
+      <div className="spacer" />
       <div>
         Sit consetetur duo duo sit justo accusam dolore, nonumy sea et dolores
         voluptua et takimata, dolore sed et sit lorem sed voluptua, amet diam

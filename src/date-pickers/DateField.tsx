@@ -8,7 +8,13 @@ import {
   type DateFieldState,
   type DateRangePickerState,
 } from "react-stately";
-import { useDateField, useDateSegment, useLocale } from "react-aria";
+import {
+  useDateField,
+  useDateSegment,
+  useLocale,
+  type AriaDatePickerProps,
+  type DateValue,
+} from "react-aria";
 import { createCalendar } from "@internationalized/date";
 
 interface DateSegmentProps {
@@ -37,7 +43,7 @@ function DateSegment({ segment, state, className }: DateSegmentProps) {
   );
 }
 
-interface DateFieldProps {
+interface DateFieldProps extends AriaDatePickerProps<DateValue> {
   className?: string;
   rangePickerState: DateRangePickerState;
   setAutoFocus: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,17 +57,18 @@ export function DateField({
   setAutoFocus,
   close,
   isOpen,
-  ...props
+  ...rest
 }: DateFieldProps) {
+  const { isDisabled } = rest;
   const { locale } = useLocale();
   const state = useDateFieldState({
-    ...props,
+    ...rest,
     locale,
     createCalendar,
   });
 
   const ref = React.useRef<HTMLDivElement>(null);
-  const { fieldProps } = useDateField(props, state, ref);
+  const { fieldProps } = useDateField(rest, state, ref);
 
   const { onKeyDown, ...otherFieldProps } = fieldProps;
 
@@ -84,8 +91,10 @@ export function DateField({
       ref={ref}
       className={cx("date-field", className)}
       onClick={() => {
-        setAutoFocus(false);
-        rangePickerState.open();
+        if (!isDisabled) {
+          setAutoFocus(false);
+          rangePickerState.open();
+        }
       }}
     >
       {state.segments.map((segment, i) => (
