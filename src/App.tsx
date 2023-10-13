@@ -41,7 +41,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="app">
       <button>Hello</button>
 
       <div className="spacer" />
@@ -89,18 +89,13 @@ function App() {
 
       <div className="spacer" />
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} style={{ display: "flex", gap: "32px" }}>
         <label>
           <div>A field</div> <input type="text" name="my-input" />
         </label>
 
-        <DateRangePicker
-          label="Plain Jane"
-          startName="whatStart"
-          endName="whatEnd"
-        />
         <div className="spacer" />
-        {/* <DateRangePicker {...dateRangePickerProps} name="withValidation" /> */}
+        <DateRangePicker {...dateRangePickerProps} />
 
         <div className="spacer" />
         <label>
@@ -108,6 +103,12 @@ function App() {
         </label>
 
         <div className="spacer" />
+
+        <DateRangePicker
+          label="Plain Jane"
+          startName="whatStart"
+          endName="whatEnd"
+        />
         <button type="submit">Submit</button>
       </form>
 

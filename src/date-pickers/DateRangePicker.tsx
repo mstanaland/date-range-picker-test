@@ -30,9 +30,11 @@ interface DateRangePickerProps<T extends DateValue>
   endRef?: React.RefObject<HTMLInputElement>;
   id?: string;
   className?: string;
+  isLabelVisible?: boolean;
 }
 
 export function DateRangePicker<T extends DateValue>({
+  isLabelVisible = true,
   startName = "rangePickerStart",
   endName = "rangePickerStartEnd",
   startRef,
@@ -97,7 +99,12 @@ export function DateRangePicker<T extends DateValue>({
   const focusFirst = labelProps.onClick as () => void;
 
   return (
-    <div className={cx("sarsa--date-range-picker", className)} id={id}>
+    <div
+      className={cx("sarsa--date-range-picker", className, {
+        "sr-only": isLabelVisible === false,
+      })}
+      id={id}
+    >
       <TabFocusGuard isOpen={state.isOpen} close={state.close} id={outsideId}>
         <div {...labelProps} className="label">
           {label}

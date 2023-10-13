@@ -27,26 +27,7 @@ export function InlinePopup({
   const popupRef = React.useRef<HTMLDivElement>(null);
   const innerRef = React.useRef<HTMLDivElement>(null);
 
-  // React.useEffect(() => {
-  //   function logOffset() {
-  //     if (popupRef.current) {
-  //       const offset = getOffsets(popupRef.current);
-  //       console.log(offset);
-  //     }
-  //     if (innerRef.current) {
-  //       console.dir(innerRef.current);
-  //     }
-  //   }
-
-  //   document.addEventListener("scroll", logOffset);
-
-  //   return () => {
-  //     document.removeEventListener("scroll", logOffset);
-  //   };
-  // }, []);
-
   const position = usePopupPosition({ popupRef, innerRef, isOpen });
-  console.log("position", position);
 
   // Setup the keyboard and mouse event listeners
   React.useEffect(() => {

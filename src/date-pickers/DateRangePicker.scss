@@ -28,9 +28,9 @@
   }
 
   .inputs-group {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    width: fit-content;
+    // width: fit-content;
     min-width: 304px;
     max-width: 100%;
     box-sizing: border-box;

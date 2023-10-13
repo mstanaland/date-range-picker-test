@@ -9,6 +9,10 @@
     flex-direction: column-reverse;
   }
 
+  &.right {
+    right: 0;
+  }
+
   .sarsa--inline-popup-children {
     position: relative;
   }
